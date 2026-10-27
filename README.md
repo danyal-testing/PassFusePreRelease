@@ -127,7 +127,7 @@ You can also open `index.html` directly from disk (`file://`) or serve the proje
 ### 1. Social Preview Image (`images/og-image.png`)
 
 - **Source path**: `images/og-image.png` (`1200 × 630` RGB PNG)
-- **Public URL**: `https://danyalpassfusebeta.vercel.app/images/og-image.png?v=6`
+- **Public URL**: `https://danyalpassfusebeta.vercel.app/images/og-image.png?v=7`
 
 To replace the social preview image:
 

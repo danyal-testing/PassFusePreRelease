@@ -11,9 +11,9 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
  * `images/og-image.png` is replaced so messaging platforms (iMessage,
  * Telegram, WhatsApp, Slack, X) fetch the new preview asset.
  */
-export const OG_IMAGE_VERSION = process.env.OG_IMAGE_VERSION || "6";
+export const OG_IMAGE_VERSION = process.env.OG_IMAGE_VERSION || "7";
 
-const input = process.argv[2] || "https://danyalpassgen.vercel.app";
+const input = process.argv[2] || "https://danyalpassfusebeta.vercel.app";
 
 const url = new URL(input);
 if (url.protocol !== "https:") {
