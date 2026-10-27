@@ -1,0 +1,121 @@
+/* =========================================================================
+   Component: strength-meter — compact horizontal four-segment strength bar
+   with smooth bidirectional fill/empty animation and uppercase status label.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .strength {
+    --meter-active-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition:
+      background-color var(--duration-theme) var(--ease-standard),
+      border-color var(--duration-theme) var(--ease-standard);
+  }
+  .strength[data-strength-level="weak"] {
+    --meter-active-color: var(--strength-weak);
+  }
+  .strength[data-strength-level="fair"] {
+    --meter-active-color: var(--strength-fair);
+  }
+  .strength[data-strength-level="strong"] {
+    --meter-active-color: var(--strength-strong);
+  }
+  .strength[data-strength-level="very-strong"] {
+    --meter-active-color: var(--strength-very-strong);
+  }
+
+  .strength__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .strength__label {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-normal);
+    transition: color var(--duration-theme) var(--ease-standard);
+  }
+  /* Deliberate uppercase treatment for the qualitative strength status label */
+  .strength__text {
+    font-family: var(--font-display-family);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    transition: color var(--duration-normal) var(--ease-standard);
+  }
+  .strength__text--weak {
+    color: var(--strength-text-weak);
+  }
+  .strength__text--fair {
+    color: var(--strength-text-fair);
+  }
+  .strength__text--strong {
+    color: var(--strength-text-strong);
+  }
+  .strength__text--very-strong {
+    color: var(--strength-text-very-strong);
+  }
+
+  /* Four equal-height horizontal segments with smooth bidirectional fill &
+     color transitions. Each `.strength__bar` acts as the rounded track while
+     `::after` animates width (`0%` <-> `100%`) and color smoothly in both
+     directions (filling and emptying) without altering layout height. */
+  .strength__bars {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  .strength__bar {
+    position: relative;
+    height: 0.375rem;
+    border-radius: var(--radius-full);
+    background-color: var(--strength-bar-inactive);
+    overflow: hidden;
+    transition: background-color var(--duration-theme) var(--ease-standard);
+  }
+  .strength__bar::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 0%;
+    border-radius: inherit;
+    background-color: var(--meter-active-color, var(--strength-bar-inactive));
+    opacity: 0;
+    transition:
+      width var(--duration-meter) var(--ease-standard),
+      background-color var(--duration-normal) var(--ease-standard),
+      opacity var(--duration-normal) var(--ease-standard);
+  }
+  .strength__bar--weak::after {
+    width: 100%;
+    opacity: 1;
+    background-color: var(--strength-weak);
+  }
+  .strength__bar--fair::after {
+    width: 100%;
+    opacity: 1;
+    background-color: var(--strength-fair);
+  }
+  .strength__bar--strong::after {
+    width: 100%;
+    opacity: 1;
+    background-color: var(--strength-strong);
+  }
+  .strength__bar--very-strong::after {
+    width: 100%;
+    opacity: 1;
+    background-color: var(--strength-very-strong);
+  }
+}

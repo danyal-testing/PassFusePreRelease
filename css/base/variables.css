@@ -1,0 +1,387 @@
+/* =========================================================================
+   Design tokens — Carbon Platinum System (Dark & Light Themes).
+   Cascade layer: tokens.
+
+   Breakpoint tokens (documented here since custom properties cannot be used
+   inside @media prelude): xs 360 · sm 480 · md 576 · lg 768 · xl 1024 ·
+   2xl 1280 · 3xl 1536.
+   ========================================================================= */
+@layer tokens {
+  :root {
+    /* ---- Typography (Manrope & Geist Mono primary with local/system fallbacks) ---- */
+    --font-display-family: "Manrope", "Inter", "Plus Jakarta Sans",
+      "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-sans: "Manrope", "Inter", "Plus Jakarta Sans", system-ui,
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --font-mono: "Geist Mono", "JetBrains Mono", "SF Mono", ui-monospace,
+      "Cascadia Code", "Fira Code", "Roboto Mono", Menlo, Consolas,
+      "Liberation Mono", monospace;
+
+    /* Fluid type scale (clamp) — clean, restrained, precise */
+    --text-2xs: 0.75rem; /* 12 — caption / status badge */
+    --text-xs: 0.8125rem; /* 13 — section label */
+    --text-sm: 0.90625rem; /* 14.5 — UI label / button / option */
+    --text-base: 0.9375rem; /* 15 — body / control label */
+    --text-md: 1rem; /* 16 — strength readout */
+    --text-lg: clamp(1.125rem, 1.02rem + 0.45vw, 1.3125rem);
+    --text-xl: clamp(1.25rem, 1.12rem + 0.65vw, 1.5rem); /* length value */
+    --text-2xl: clamp(1.375rem, 1.1rem + 1.4vw, 1.875rem); /* password */
+    --text-3xl: clamp(1.625rem, 1.25rem + 1.8vw, 2.25rem);
+
+    --leading-tight: 1.15;
+    --leading-normal: 1.5;
+    --tracking-tight: -0.02em;
+    --tracking-normal: -0.005em;
+    --tracking-wide: 0.04em;
+    --tracking-wider: 0.07em;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* Semantic type roles */
+    --font-display: clamp(2rem, 1.5rem + 2.5vw, 2.875rem);
+    --font-h3: var(--text-xl);
+    --font-body: var(--text-base);
+    --font-small: var(--text-sm);
+    --font-button: var(--text-sm);
+
+    /* Reading measure */
+    --measure-narrow: 48ch;
+
+    /* ---- Spacing scale (4px base) ---- */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+
+    /* ---- Radius ---- */
+    --radius-xs: 0.3125rem;
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1.0625rem;
+    --radius-full: 9999px;
+
+    /* ---- Motion System (consistent interaction, meter, theme & ambient timing) ---- */
+    --duration-instant: 100ms;
+    --duration-press: 120ms; /* Pressed/active feedback (100–160ms) */
+    --duration-fast: 180ms; /* Hover & color feedback (150–220ms) */
+    --duration-normal: 220ms; /* Standard control & icon transitions (180–280ms) */
+    --duration-slow: 280ms;
+    --duration-emphasized: 320ms; /* Larger state & icon transitions (250–350ms) */
+    --duration-meter: 360ms; /* Smooth password-strength fill & empty (300–450ms) */
+    --duration-theme: 260ms; /* Restrained application-wide theme switch */
+    --ambient-primary-duration: 32s;
+    --ambient-secondary-duration: 26s;
+    --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
+
+    /* ---- Opacity ---- */
+    --opacity-disabled: 0.42;
+
+    /* ---- Layout ---- */
+    --container-max: 33.5rem; /* 536px */
+    --control-height: 3rem;
+    --control-height-compact: 2.75rem;
+
+    /* ---- Official Strength-Status Colors (Saturated Semantic Palette) ---- */
+    --strength-weak: #ff4d5a;
+    --strength-fair: #ff9f1c;
+    --strength-strong: #4f9dff;
+    --strength-very-strong: #38d996;
+  }
+
+  /* ---- Dark Theme — Carbon Platinum (Obsidian, Graphite & Smoked Glass) ---- */
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Core Carbon Platinum tokens */
+    --bg: #090b0f; /* Obsidian background */
+    --bg-gradient-top: #10141c;
+    --surface-1: #141820; /* Graphite surface */
+    --surface-2: #1b222c; /* Smoked glass surface */
+    --surface-3: #232c39; /* Raised control & track surface */
+    --card-surface: linear-gradient(
+      180deg,
+      rgba(27, 34, 44, 0.92) 0%,
+      rgba(20, 24, 32, 0.94) 100%
+    );
+    --option-hover-bg: rgba(27, 34, 44, 0.72);
+
+    --text-primary: #eef2f7; /* Primary text */
+    --text-secondary: #a8b3c2; /* Secondary text */
+    --text-muted: #9aa6b8;
+    --text-placeholder: #a8b3c2;
+
+    --accent: #b6c9df; /* Platinum accent */
+    --accent-secondary: #8298b8; /* Secondary accent */
+    --accent-hover: #c8d8ea;
+    --accent-pressed: #9ab2ce;
+    --accent-gradient: linear-gradient(
+      135deg,
+      #c5d6ea 0%,
+      #b6c9df 52%,
+      #96acc8 100%
+    );
+    --accent-gradient-hover: linear-gradient(
+      135deg,
+      #d4e2f2 0%,
+      #c4d5e9 52%,
+      #a8bdd7 100%
+    );
+    --accent-glow: 0 10px 26px -6px rgba(182, 201, 223, 0.26),
+      0 4px 12px -4px rgba(130, 152, 184, 0.22);
+    --accent-text: #b6c9df;
+    --on-accent: #090b0f;
+    --focus-ring: #b6c9df;
+
+    --border: #303b49; /* Subtle border */
+    --border-subtle: rgba(182, 201, 223, 0.14);
+    --border-strong: rgba(182, 201, 223, 0.36);
+    --border-accent: rgba(182, 201, 223, 0.52);
+
+    /* Slider tokens */
+    --slider-track: #252e3c;
+    --slider-fill-start: #8298b8;
+    --slider-fill-end: #b6c9df;
+    --slider-thumb-bg: #eef2f7;
+    --slider-thumb-border: #8298b8;
+    --slider-thumb-hover-bg: #ffffff;
+    --slider-thumb-hover-border: #b6c9df;
+    --slider-thumb-shadow: 0 2px 6px rgba(0, 0, 0, 0.48),
+      0 0 0 1px rgba(182, 201, 223, 0.16);
+
+    /* Password character category colors (Dark) */
+    --char-letter: #eef2f7;
+    --char-number: #8bbfea;
+    --char-symbol: #ff6b76;
+
+    /* Strength status text colors (high contrast on smoked glass #1B222C) */
+    --strength-text-weak: #ff6b76;
+    --strength-text-fair: #ffae3d;
+    --strength-text-strong: #6baeff;
+    --strength-text-very-strong: #4ae3a4;
+    --strength-bar-inactive: #26303e;
+
+    /* Dot Grid & Animated Steel-Blue Ambient Lighting tokens (Dark) */
+    --dot-grid-color: rgba(164, 188, 218, 0.26);
+    --dot-grid-size: 22px;
+    --ambient-primary-core: rgba(118, 154, 198, 0.26);
+    --ambient-primary-mid: rgba(88, 122, 166, 0.15);
+    --ambient-primary-edge: rgba(62, 92, 132, 0.05);
+    --ambient-secondary-core: rgba(176, 198, 224, 0.2);
+    --ambient-secondary-mid: rgba(108, 138, 178, 0.11);
+
+    --icon-accent: #b6c9df;
+    --icon-accent-strong: #eef2f7;
+    --success: #4ae3a4;
+    --success-surface: rgba(74, 227, 164, 0.12);
+    --success-border: rgba(74, 227, 164, 0.34);
+    --danger: #ff6b76;
+    --danger-surface: rgba(255, 107, 118, 0.12);
+    --danger-border: rgba(255, 107, 118, 0.34);
+
+    /* Shadows & dimensionality */
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.42);
+    --elevation-2: 0 1px 0 rgba(238, 242, 247, 0.07) inset,
+      0 18px 42px -10px rgba(0, 0, 0, 0.68),
+      0 6px 18px rgba(130, 152, 184, 0.07);
+    --elevation-3: 0 1px 0 rgba(182, 201, 223, 0.14) inset,
+      0 24px 52px -12px rgba(0, 0, 0, 0.75), 0 8px 22px rgba(182, 201, 223, 0.1);
+  }
+
+  /* ---- Light Theme — Carbon Platinum (Soft Alabaster, Pure White & Slate) ---- */
+  :root[data-theme="light"] {
+    color-scheme: light;
+
+    /* Core Carbon Platinum tokens */
+    --bg: #f3f5f8; /* Background */
+    --bg-gradient-top: #f9fafc;
+    --surface-1: #ffffff; /* Primary surface */
+    --surface-2: #f8fafc; /* Secondary surface */
+    --surface-3: #e6ecf3; /* Subtle inset / track surface */
+    --card-surface: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(248, 250, 252, 0.94) 100%
+    );
+    --option-hover-bg: #f3f5f8;
+
+    --text-primary: #16202c; /* Primary text */
+    --text-secondary: #52637a; /* Secondary text */
+    --text-muted: #52637a;
+    --text-placeholder: #52637a;
+
+    --accent: #526d8e; /* Platinum accent */
+    --accent-secondary: #8298b8; /* Secondary accent */
+    --accent-hover: #425b7a;
+    --accent-pressed: #344963;
+    --accent-gradient: linear-gradient(
+      135deg,
+      #4a6484 0%,
+      #526d8e 52%,
+      #3e5673 100%
+    );
+    --accent-gradient-hover: linear-gradient(
+      135deg,
+      #3d5572 0%,
+      #465f7d 52%,
+      #324760 100%
+    );
+    --accent-glow: 0 10px 24px -6px rgba(82, 109, 142, 0.26),
+      0 4px 10px -4px rgba(82, 109, 142, 0.16);
+    --accent-text: #3e5673;
+    --on-accent: #ffffff;
+    --focus-ring: #526d8e;
+
+    --border: #dce3eb; /* Subtle border */
+    --border-subtle: rgba(82, 109, 142, 0.14);
+    --border-strong: #b8c6d8;
+    --border-accent: #526d8e;
+
+    /* Slider tokens (Light — light center, subtle platinum-blue border, soft shadow) */
+    --slider-track: #dce3eb;
+    --slider-fill-start: #8298b8;
+    --slider-fill-end: #526d8e;
+    --slider-thumb-bg: #ffffff;
+    --slider-thumb-border: #526d8e;
+    --slider-thumb-hover-bg: #f8fafc;
+    --slider-thumb-hover-border: #3e5673;
+    --slider-thumb-shadow: 0 2px 5px rgba(22, 32, 44, 0.16),
+      0 0 0 1px rgba(82, 109, 142, 0.1);
+
+    /* Password character category colors (Light) */
+    --char-letter: #16202c;
+    --char-number: #2f75b8;
+    --char-symbol: #c83f50;
+
+    /* Strength status text colors (legible on #F8FAFC while preserving semantic hue) */
+    --strength-text-weak: #c82836;
+    --strength-text-fair: #b86200;
+    --strength-text-strong: #1f64c2;
+    --strength-text-very-strong: #157f54;
+    --strength-bar-inactive: #dce3eb;
+
+    /* Dot Grid & Animated Steel-Blue Ambient Lighting tokens (Light — restrained, clean) */
+    --dot-grid-color: rgba(74, 100, 132, 0.2);
+    --dot-grid-size: 22px;
+    --ambient-primary-core: rgba(114, 142, 178, 0.18);
+    --ambient-primary-mid: rgba(130, 156, 188, 0.1);
+    --ambient-primary-edge: rgba(130, 156, 188, 0.03);
+    --ambient-secondary-core: rgba(82, 109, 142, 0.14);
+    --ambient-secondary-mid: rgba(146, 170, 198, 0.08);
+
+    --icon-accent: #526d8e;
+    --icon-accent-strong: #16202c;
+    --success: #157f54;
+    --success-surface: rgba(21, 127, 84, 0.1);
+    --success-border: rgba(21, 127, 84, 0.28);
+    --danger: #c82836;
+    --danger-surface: rgba(200, 40, 54, 0.1);
+    --danger-border: rgba(200, 40, 54, 0.28);
+
+    /* Shadows & dimensionality */
+    --elevation-1: 0 1px 2px rgba(22, 32, 44, 0.06);
+    --elevation-2: 0 1px 0 rgba(255, 255, 255, 0.92) inset,
+      0 16px 38px -8px rgba(22, 32, 44, 0.09),
+      0 4px 12px rgba(82, 109, 142, 0.06);
+    --elevation-3: 0 1px 0 rgba(255, 255, 255, 0.98) inset,
+      0 22px 48px -10px rgba(22, 32, 44, 0.13),
+      0 6px 16px rgba(82, 109, 142, 0.09);
+  }
+
+  /* No-JS fallback: honour system preference when no explicit attribute. */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) {
+      color-scheme: light;
+      --bg: #f3f5f8;
+      --bg-gradient-top: #f9fafc;
+      --surface-1: #ffffff;
+      --surface-2: #f8fafc;
+      --surface-3: #e6ecf3;
+      --card-surface: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(248, 250, 252, 0.94) 100%
+      );
+      --option-hover-bg: #f3f5f8;
+      --text-primary: #16202c;
+      --text-secondary: #52637a;
+      --text-muted: #52637a;
+      --text-placeholder: #52637a;
+      --accent: #526d8e;
+      --accent-secondary: #8298b8;
+      --accent-hover: #425b7a;
+      --accent-pressed: #344963;
+      --accent-gradient: linear-gradient(
+        135deg,
+        #4a6484 0%,
+        #526d8e 52%,
+        #3e5673 100%
+      );
+      --accent-gradient-hover: linear-gradient(
+        135deg,
+        #3d5572 0%,
+        #465f7d 52%,
+        #324760 100%
+      );
+      --accent-glow: 0 10px 24px -6px rgba(82, 109, 142, 0.26),
+        0 4px 10px -4px rgba(82, 109, 142, 0.16);
+      --accent-text: #3e5673;
+      --on-accent: #ffffff;
+      --focus-ring: #526d8e;
+      --border: #dce3eb;
+      --border-subtle: rgba(82, 109, 142, 0.14);
+      --border-strong: #b8c6d8;
+      --border-accent: #526d8e;
+      --slider-track: #dce3eb;
+      --slider-fill-start: #8298b8;
+      --slider-fill-end: #526d8e;
+      --slider-thumb-bg: #ffffff;
+      --slider-thumb-border: #526d8e;
+      --slider-thumb-hover-bg: #f8fafc;
+      --slider-thumb-hover-border: #3e5673;
+      --slider-thumb-shadow: 0 2px 5px rgba(22, 32, 44, 0.16),
+        0 0 0 1px rgba(82, 109, 142, 0.1);
+      --char-letter: #16202c;
+      --char-number: #2f75b8;
+      --char-symbol: #c83f50;
+      --strength-text-weak: #c82836;
+      --strength-text-fair: #b86200;
+      --strength-text-strong: #1f64c2;
+      --strength-text-very-strong: #157f54;
+      --strength-bar-inactive: #dce3eb;
+      --dot-grid-color: rgba(74, 100, 132, 0.2);
+      --dot-grid-size: 22px;
+      --ambient-primary-core: rgba(114, 142, 178, 0.18);
+      --ambient-primary-mid: rgba(130, 156, 188, 0.1);
+      --ambient-primary-edge: rgba(130, 156, 188, 0.03);
+      --ambient-secondary-core: rgba(82, 109, 142, 0.14);
+      --ambient-secondary-mid: rgba(146, 170, 198, 0.08);
+      --icon-accent: #526d8e;
+      --icon-accent-strong: #16202c;
+      --success: #157f54;
+      --success-surface: rgba(21, 127, 84, 0.1);
+      --success-border: rgba(21, 127, 84, 0.28);
+      --danger: #c82836;
+      --danger-surface: rgba(200, 40, 54, 0.1);
+      --danger-border: rgba(200, 40, 54, 0.28);
+      --elevation-1: 0 1px 2px rgba(22, 32, 44, 0.06);
+      --elevation-2: 0 1px 0 rgba(255, 255, 255, 0.92) inset,
+        0 16px 38px -8px rgba(22, 32, 44, 0.09),
+        0 4px 12px rgba(82, 109, 142, 0.06);
+      --elevation-3: 0 1px 0 rgba(255, 255, 255, 0.98) inset,
+        0 22px 48px -10px rgba(22, 32, 44, 0.13),
+        0 6px 16px rgba(82, 109, 142, 0.09);
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "name": "PassFuse",
+  "short_name": "PassFuse",
+  "description": "Cryptographically secure password generator that runs locally in your browser. Passwords are never stored or sent.",
+  "id": ".",
+  "start_url": ".",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#090B0F",
+  "theme_color": "#090B0F",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["utilities", "security", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Generate a secure password",
+      "short_name": "Generate",
+      "description": "Open the PassFuse password generator controls",
+      "url": "./#generator-settings",
+      "icons": [
+        {
+          "src": "images/icons/app/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "images/icons/app/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/app/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icons/app/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/icons/app/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "docs/screenshots/laptop-dark.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Laptop view in dark theme"
+    },
+    {
+      "src": "docs/screenshots/laptop-light.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Laptop view in light theme"
+    },
+    {
+      "src": "docs/screenshots/tablet-dark.png",
+      "sizes": "1668x2388",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tablet view in dark theme"
+    },
+    {
+      "src": "docs/screenshots/tablet-light.png",
+      "sizes": "1668x2388",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tablet view in light theme"
+    },
+    {
+      "src": "docs/screenshots/mobile-dark.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view in dark theme"
+    },
+    {
+      "src": "docs/screenshots/mobile-light.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view in light theme"
+    }
+  ]
+}

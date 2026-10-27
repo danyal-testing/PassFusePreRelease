@@ -1,0 +1,102 @@
+/* =========================================================================
+   Utilities: animations — keyframes and reduced-motion handling.
+   Keyframes are global (not layered) so they can be referenced anywhere.
+   ========================================================================= */
+
+/* Smooth initial entrance of the generator shell. */
+@keyframes pg-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle pop when a new password is written to the output. */
+@keyframes pg-pop {
+  0% {
+    transform: scale(0.99);
+    opacity: 0.65;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Restrained check-icon entrance when copying succeeds. */
+@keyframes pg-icon-pop {
+  0% {
+    transform: scale(0.72);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Primary Steel-Blue Ambient Light (32s smooth orbital drift & scale).
+   Translates the oversized radial light across the background while gently
+   rotating and scaling so the Steel-blue illumination visibly shifts behind
+   the steady Dot Grid during normal use. */
+@keyframes pg-ambient-primary {
+  0% {
+    transform: translate3d(-58%, -54%, 0) rotate(0deg) scale(1, 0.92);
+  }
+  33% {
+    transform: translate3d(-43%, -46%, 0) rotate(120deg) scale(1.08, 0.98);
+  }
+  66% {
+    transform: translate3d(-52%, -42%, 0) rotate(240deg) scale(0.96, 1.06);
+  }
+  100% {
+    transform: translate3d(-58%, -54%, 0) rotate(360deg) scale(1, 0.92);
+  }
+}
+
+/* Secondary Platinum / Steel-Blue Ambient Light (26s independent counter-drift).
+   Moves at a different pace and direction to create natural, living depth. */
+@keyframes pg-ambient-secondary {
+  0% {
+    transform: translate3d(-42%, -46%, 0) rotate(360deg) scale(0.94, 1.04);
+  }
+  50% {
+    transform: translate3d(-57%, -55%, 0) rotate(180deg) scale(1.06, 0.94);
+  }
+  100% {
+    transform: translate3d(-42%, -46%, 0) rotate(0deg) scale(0.94, 1.04);
+  }
+}
+
+/* Respect users who prefer reduced motion: stop ambient gradient motion and
+   non-essential rotation/scaling while preserving immediate state feedback,
+   a balanced static ambient glow, and the radially faded Dot Grid. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body::before {
+    animation: none !important;
+    transform: translate3d(-52%, -50%, 0) rotate(18deg) scale(1.02, 0.94) !important;
+  }
+
+  body::after {
+    animation: none !important;
+    transform: translate3d(-48%, -48%, 0) rotate(-14deg) scale(0.96, 1.02) !important;
+  }
+
+  [data-theme="dark"] .theme-toggle__icon--sun,
+  [data-theme="light"] .theme-toggle__icon--moon {
+    transform: none !important;
+  }
+}

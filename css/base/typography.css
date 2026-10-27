@@ -1,0 +1,20 @@
+/* =========================================================================
+   Typography — base type treatment.
+   Cascade layer: base.
+   The type-scale tokens live in variables.css; this file applies the base
+   font family, size, tracking and text colour to the document root element.
+   ========================================================================= */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-normal);
+    color: var(--text-primary);
+    font-feature-settings:
+      "cv02" 1,
+      "cv03" 1,
+      "cv04" 1,
+      "cv11" 1;
+  }
+}

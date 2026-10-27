@@ -1,0 +1,100 @@
+/* =========================================================================
+   Component: checkbox — four character-category controls in a responsive
+   two-column grid (switching to one column on narrow mobile viewports).
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2) var(--space-4);
+    border: 0;
+  }
+  .option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 2.75rem;
+    padding: var(--space-1) var(--space-2);
+    margin-inline: calc(var(--space-2) * -1);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-instant) var(--ease-standard);
+  }
+  .option:hover {
+    background-color: var(--option-hover-bg);
+  }
+  .option:active {
+    transform: scale(0.99);
+  }
+  .option__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .option__box {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius-xs);
+  }
+  /* Unchecked state: restrained rounded square outline. */
+  .option__box::before {
+    content: "";
+    width: 1.0625rem;
+    height: 1.0625rem;
+    border: 1.75px solid var(--border-strong);
+    border-radius: var(--radius-xs);
+    transition:
+      border-color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-spring),
+      opacity var(--duration-fast) var(--ease-standard);
+  }
+  /* Checked state: box-with-check icon (Tabler "checkbox"). */
+  .option__check {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--icon-accent);
+    opacity: 0;
+    transform: scale(0.55);
+    transition:
+      opacity var(--duration-fast) var(--ease-standard),
+      transform var(--duration-normal) var(--ease-spring);
+    pointer-events: none;
+  }
+  .option:hover .option__box::before {
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+  .option__input:checked + .option__box::before {
+    opacity: 0;
+  }
+  .option__input:checked + .option__box .option__check {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .option__input:focus-visible + .option__box {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .option__label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: var(--text-primary);
+    user-select: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+}

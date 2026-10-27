@@ -1,0 +1,126 @@
+/* =========================================================================
+   Layout: header — title row with pixel-perfect Swiss PF brand mark and
+   the theme toggle button with smooth Sun/Moon icon transitions.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .generator__header {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr 2.75rem;
+    align-items: center;
+  }
+  .generator__brand {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5625rem;
+    min-width: 0;
+  }
+  .generator__logo {
+    width: 1.5rem;
+    height: 1.375rem;
+    flex: none;
+  }
+  .generator__logo-primary {
+    fill: var(--text-primary);
+    transition: fill var(--duration-theme) var(--ease-standard);
+  }
+  .generator__logo-accent {
+    fill: var(--accent-secondary);
+    transition: fill var(--duration-theme) var(--ease-standard);
+  }
+  .generator__title {
+    text-align: center;
+    font-family: var(--font-display-family);
+    font-size: clamp(0.875rem, 0.78rem + 0.45vw, 1.0625rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--text-primary);
+    transition: color var(--duration-theme) var(--ease-standard);
+  }
+
+  /* The entire button is the hit target: children never intercept clicks, and
+     a raised stacking context keeps it clickable above neighbouring cells. */
+  .theme-toggle {
+    grid-column: 3;
+    justify-self: end;
+    position: relative;
+    z-index: 2;
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    background-color: var(--surface-1);
+    background-image: var(--card-surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--elevation-1);
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-theme) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard),
+      transform var(--duration-press) var(--ease-standard);
+  }
+  .theme-toggle:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+    box-shadow: var(--elevation-2);
+    transform: translateY(-1px);
+  }
+  .theme-toggle:active {
+    transform: translateY(0) scale(0.94);
+  }
+  /* Route every click on the icons / hidden label up to the button itself. */
+  .theme-toggle > * {
+    pointer-events: none;
+  }
+  .theme-toggle::after {
+    content: "";
+    position: absolute;
+    inset: -0.5rem;
+    border-radius: inherit;
+  }
+
+  /* Smooth Sun/Moon icon cross-fade, rotation, and scale without layout jump.
+     Both icons occupy the same grid cell; the inactive icon fades and scales
+     out while the active icon rotates into place. */
+  .theme-toggle__icon {
+    grid-area: 1 / 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition:
+      opacity var(--duration-normal) var(--ease-standard),
+      transform var(--duration-emphasized) var(--ease-emphasized);
+  }
+  [data-theme="dark"] .theme-toggle__icon--sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  [data-theme="dark"] .theme-toggle__icon--moon {
+    opacity: 0;
+    transform: rotate(-75deg) scale(0.55);
+  }
+  [data-theme="light"] .theme-toggle__icon--sun {
+    opacity: 0;
+    transform: rotate(75deg) scale(0.55);
+  }
+  [data-theme="light"] .theme-toggle__icon--moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  .theme-toggle:hover .theme-toggle__icon--sun {
+    transform: rotate(18deg) scale(1.05);
+  }
+  [data-theme="light"] .theme-toggle:hover .theme-toggle__icon--sun {
+    transform: rotate(75deg) scale(0.55);
+  }
+  [data-theme="light"] .theme-toggle:hover .theme-toggle__icon--moon {
+    transform: rotate(-12deg) scale(1.05);
+  }
+}

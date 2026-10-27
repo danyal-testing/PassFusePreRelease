@@ -1,0 +1,206 @@
+/* =========================================================================
+   Component: card — Carbon Platinum glass surfaces, password output with
+   category-colored characters, refined copy button state transitions, and
+   main generator panel.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  /* ---- Card base (Glassmorphism + Subtle Inner Highlight) ---- */
+  .card {
+    background-color: var(--surface-1);
+    background-image: var(--card-surface);
+    backdrop-filter: blur(20px) saturate(135%);
+    -webkit-backdrop-filter: blur(20px) saturate(135%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elevation-2);
+    transition:
+      background-color var(--duration-theme) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+  }
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--border-strong);
+    box-shadow: var(--elevation-3);
+  }
+
+  /* ---- Output ---- */
+  .generator__output {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 clamp(1rem, 3.8vw, 1.5rem);
+    min-height: 4.375rem;
+  }
+  .generator__password {
+    display: block;
+    align-content: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-feature-settings:
+      "zero" 1,
+      "ss01" 1;
+    font-variant-ligatures: none;
+    font-size: clamp(1.0625rem, 2.3vw, 1.4375rem);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.025em;
+    line-height: 1.3;
+    padding-block: var(--space-2);
+    color: var(--text-primary);
+    /* Always show the FULL password: wrap onto extra lines instead of clipping
+       with an ellipsis. break-all fills each line completely so punctuation or
+       symbols inside a 32-char password never trigger premature line breaks. */
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    hyphens: none;
+    user-select: all;
+    transition: color var(--duration-theme) var(--ease-standard);
+  }
+  .generator__password--placeholder {
+    font-family: var(--font-sans);
+    color: var(--text-placeholder);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-normal);
+    word-break: normal;
+    user-select: none;
+  }
+  .generator__password.is-updated {
+    animation: pg-pop var(--duration-slow) var(--ease-spring);
+  }
+
+  /* ---- Category-aware character coloring ---- */
+  .pw-char {
+    transition: color var(--duration-theme) var(--ease-standard);
+  }
+  .pw-char--letter {
+    color: var(--char-letter);
+  }
+  .pw-char--number {
+    color: var(--char-number);
+  }
+  .pw-char--symbol {
+    color: var(--char-symbol);
+  }
+
+  /* ---- Copy control (Idle, Hover, Active, Success `COPIED`, and Error states) ---- */
+  .generator__copy {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    flex: none;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: var(--space-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--icon-accent);
+    background-color: transparent;
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard),
+      transform var(--duration-press) var(--ease-standard),
+      opacity var(--duration-fast) var(--ease-standard);
+  }
+  .generator__copy:not(:disabled):hover {
+    color: var(--icon-accent-strong);
+    background-color: var(--surface-2);
+    border-color: var(--border-subtle);
+    transform: translateY(-1px);
+  }
+  .generator__copy:not(:disabled):active {
+    transform: translateY(0) scale(0.94);
+  }
+  .generator__copy:disabled {
+    color: var(--text-muted);
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+  }
+  .generator__copy.is-copied {
+    color: var(--success);
+    background-color: var(--success-surface);
+    border-color: var(--success-border);
+    padding-inline: 0.625rem;
+  }
+  .generator__copy.is-copied:not(:disabled):hover {
+    color: var(--success);
+    background-color: var(--success-surface);
+    border-color: var(--success-border);
+  }
+  .generator__copy.is-error {
+    color: var(--danger);
+    background-color: var(--danger-surface);
+    border-color: var(--danger-border);
+    padding-inline: 0.625rem;
+  }
+  .generator__copy.is-error .generator__copy-status {
+    color: var(--danger);
+    text-transform: none;
+    letter-spacing: var(--tracking-normal);
+  }
+  .generator__copy-status {
+    font-family: var(--font-display-family);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--success);
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-normal) var(--ease-standard);
+  }
+  .generator__copy-status:empty {
+    display: none;
+  }
+  .generator__copy-icon {
+    width: 1.3125rem;
+    height: 1.3125rem;
+    flex: none;
+    fill: currentColor;
+    transition:
+      transform var(--duration-normal) var(--ease-emphasized),
+      color var(--duration-fast) var(--ease-standard);
+  }
+  .generator__copy-icon--error {
+    fill: none;
+    stroke: currentColor;
+  }
+  .generator__copy:not(:disabled):hover .generator__copy-icon--copy {
+    transform: scale(1.06);
+  }
+  /* Idle shows "copy"; copied shows "copy-check"; error shows "alert-triangle". */
+  .generator__copy-icon--check,
+  .generator__copy-icon--error {
+    display: none;
+  }
+  .generator__copy-icon--check {
+    color: var(--success);
+  }
+  .generator__copy-icon--error {
+    color: var(--danger);
+  }
+  .generator__copy.is-copied .generator__copy-icon--copy,
+  .generator__copy.is-error .generator__copy-icon--copy {
+    display: none;
+  }
+  .generator__copy.is-copied .generator__copy-icon--check,
+  .generator__copy.is-error .generator__copy-icon--error {
+    display: block;
+    animation: pg-icon-pop var(--duration-normal) var(--ease-spring);
+  }
+
+  /* ---- Main Generator Panel ---- */
+  .generator__panel {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.875rem, 2vh, 1.25rem);
+    padding: clamp(1.125rem, 3.2vw, 1.5rem);
+  }
+}

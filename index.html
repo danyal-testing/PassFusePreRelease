@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
+    <title>PassFuse — Strong, Secure Passwords</title>
+    <meta
+      name="description"
+      content="Generate strong, cryptographically secure passwords in your browser with adjustable length and character options. Passwords are never stored or sent."
+    />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#090B0F" data-theme-color />
+    <meta name="author" content="DanyaL NaDeri" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href="https://danyalpassgen.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="PassFuse" />
+    <meta property="og:title" content="PassFuse — Strong, Secure Passwords" />
+    <meta
+      property="og:description"
+      content="Cryptographically secure password generator that runs locally in your browser. Installable as a PWA. Passwords are never stored or sent."
+    />
+    <meta property="og:url" content="https://danyalpassgen.vercel.app/" />
+    <meta
+      property="og:image"
+      content="https://danyalpassgen.vercel.app/images/og-image.png?v=6"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://danyalpassgen.vercel.app/images/og-image.png?v=6"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="PassFuse — cryptographically secure password generator in your browser"
+    />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PassFuse — Strong, Secure Passwords" />
+    <meta
+      name="twitter:description"
+      content="Cryptographically secure password generator that runs locally in your browser. Installable as a PWA. Passwords are never stored or sent."
+    />
+    <meta
+      name="twitter:image"
+      content="https://danyalpassgen.vercel.app/images/og-image.png?v=6"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="PassFuse — cryptographically secure password generator in your browser"
+    />
+
+    <!-- PWA + platform integration -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="application-name" content="PassFuse" />
+    <meta name="apple-mobile-web-app-title" content="PassFuse" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Structured data (Rich Results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PassFuse",
+        "url": "https://danyalpassgen.vercel.app/",
+        "image": "https://danyalpassgen.vercel.app/images/og-image.png?v=6",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires JavaScript and the Web Crypto API",
+        "description": "Cryptographically secure password generator that runs locally in your browser. Installable as a PWA. Passwords are never stored or sent.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "DanyaL NaDeri" },
+        "license": "https://opensource.org/licenses/MIT"
+      }
+    </script>
+
+    <!--
+      ICON ATTRIBUTION
+      UI control icons in this app are from Tabler Icons (https://tabler.io/icons),
+      MIT License, Copyright (c) 2020-2026 Pawel Kuna. The PassFuse Swiss PF
+      geometric brand mark is custom vector artwork in images/logo-mark.svg and
+      images/logo-rounded.svg.
+    -->
+
+    <link rel="icon" href="images/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="images/favicon-48.png"
+    />
+    <link rel="icon" type="image/svg+xml" href="images/logo-rounded.svg" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Set theme before first paint to avoid a flash of the wrong theme. -->
+    <script>
+      (function () {
+        try {
+          let t = localStorage.getItem("pg-theme");
+          if (t !== "light" && t !== "dark") {
+            t = window.matchMedia?.("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+          const m = document.querySelector("[data-theme-color]");
+          if (m)
+            m.setAttribute("content", t === "light" ? "#F3F5F8" : "#090B0F");
+        } catch {
+          /* ignore restricted storage */
+        }
+      })();
+    </script>
+
+    <!--
+      Ordered classic scripts with `defer` placed in <head> so the browser's
+      preload scanner downloads them in parallel with HTML parsing, then
+      executes them in exact order after the DOM is ready while preserving
+      direct file:// compatibility.
+    -->
+    <script src="js/config.js" defer></script>
+    <script src="js/random.js" defer></script>
+    <script src="js/generator.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script src="js/clipboard.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/pwa.js" defer></script>
+  </head>
+  <body>
+    <div class="ambient-background" aria-hidden="true"></div>
+    <main class="generator" aria-labelledby="generator-title">
+      <header class="generator__header">
+        <div class="generator__brand">
+          <svg
+            class="generator__logo"
+            viewBox="124 140 269 232"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <g class="generator__logo-primary">
+              <polygon points="208,144 257,144 177,272 128,272" />
+              <polygon points="276,144 325,144 185,368 136,368" />
+            </g>
+            <g class="generator__logo-accent">
+              <path d="M 325 144 A 64 64 0 0 1 325 272 Z" />
+              <polygon
+                points="263,272 325,272 325,320 283,320 253,368 204,368"
+              />
+            </g>
+          </svg>
+          <h1 class="generator__title" id="generator-title">
+            PASSWORD GENERATOR
+          </h1>
+        </div>
+
+        <button
+          class="theme-toggle"
+          type="button"
+          data-theme-toggle
+          aria-pressed="false"
+          title="Switch theme"
+        >
+          <span class="visually-hidden" data-theme-label
+            >Switch to light theme</span
+          >
+          <!-- Sun icon (shown in dark theme) -->
+          <svg
+            class="theme-toggle__icon theme-toggle__icon--sun"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+            <path
+              d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"
+            />
+          </svg>
+          <!-- Moon icon (shown in light theme) -->
+          <svg
+            class="theme-toggle__icon theme-toggle__icon--moon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+            />
+          </svg>
+        </button>
+      </header>
+
+      <!-- Output -->
+      <div class="card generator__output">
+        <output
+          class="generator__password generator__password--placeholder"
+          data-password-output
+          aria-label="Generated password"
+          >Generate a password</output
+        >
+        <button
+          class="generator__copy"
+          type="button"
+          data-copy-button
+          aria-label="Copy password to clipboard"
+          disabled
+          title="Generate a password first"
+        >
+          <span
+            class="generator__copy-status"
+            data-copy-text
+            aria-hidden="true"
+          ></span>
+          <!-- Idle state — Tabler "copy" icon -->
+          <svg
+            class="generator__copy-icon generator__copy-icon--copy"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M20.926 7.074a3.67 3.67 0 0 1 1.074 2.593v8.666a3.667 3.667 0 0 1 -3.667 3.667h-8.666a3.667 3.667 0 0 1 -3.667 -3.667v-8.666q 0 -.053 .005 -.102a3.66 3.66 0 0 1 3.662 -3.565h8.666c.973 0 1.905 .386 2.593 1.074"
+            />
+            <path
+              d="M17.374 3.514a1 1 0 1 1 -1.748 .972c-.221 -.398 -.342 -.486 -.626 -.486h-10c-.548 0 -1 .452 -1 1v9.998c0 .36 .194 .692 .507 .87a1 1 0 1 1 -.99 1.738a3 3 0 0 1 -1.517 -2.606v-10c0 -1.652 1.348 -3 3 -3h10c1.094 0 1.828 .533 2.374 1.514"
+            />
+          </svg>
+          <!-- Copied state — Tabler "copy-check" icon -->
+          <svg
+            class="generator__copy-icon generator__copy-icon--check"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M18.333 6a3.667 3.667 0 0 1 3.667 3.667v8.666a3.667 3.667 0 0 1 -3.667 3.667h-8.666a3.667 3.667 0 0 1 -3.667 -3.667v-8.666a3.667 3.667 0 0 1 3.667 -3.667zm-3.333 -4c1.094 0 1.828 .533 2.374 1.514a1 1 0 1 1 -1.748 .972c-.221 -.398 -.342 -.486 -.626 -.486h-10c-.548 0 -1 .452 -1 1v9.998c0 .32 .154 .618 .407 .805l.1 .065a1 1 0 1 1 -.99 1.738a3 3 0 0 1 -1.517 -2.606v-10c0 -1.652 1.348 -3 3 -3zm1.293 9.293l-3.293 3.292l-1.293 -1.292a1 1 0 0 0 -1.414 1.414l2 2a1 1 0 0 0 1.414 0l4 -4a1 1 0 0 0 -1.414 -1.414"
+            />
+          </svg>
+          <!-- Error state — Tabler "alert-triangle" icon -->
+          <svg
+            class="generator__copy-icon generator__copy-icon--error"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M12 9v4" />
+            <path
+              d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z"
+            />
+            <path d="M12 16h.01" />
+          </svg>
+        </button>
+        <p
+          class="visually-hidden"
+          role="status"
+          aria-live="polite"
+          data-copy-announcement
+        ></p>
+      </div>
+
+      <p
+        class="visually-hidden"
+        role="status"
+        aria-live="polite"
+        data-generation-status
+      ></p>
+
+      <!-- Settings -->
+      <form
+        class="card generator__panel"
+        id="generator-settings"
+        data-form
+        novalidate
+      >
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="length">Character Length</label>
+            <output class="field__value" for="length" data-length-output
+              >16</output
+            >
+          </div>
+          <input
+            id="length"
+            class="range"
+            type="range"
+            min="8"
+            max="32"
+            step="1"
+            value="16"
+            data-length-input
+          />
+        </div>
+
+        <fieldset class="options">
+          <legend class="options__legend visually-hidden">
+            Character options
+          </legend>
+
+          <!-- Each option: hidden native checkbox drives the state; the box
+               shows an outline when unchecked and the Tabler "checkbox"
+               icon when checked. -->
+          <label class="option" for="uppercase">
+            <input
+              class="option__input"
+              type="checkbox"
+              id="uppercase"
+              checked
+              data-option="uppercase"
+            />
+            <span class="option__box" aria-hidden="true">
+              <svg
+                class="option__check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                focusable="false"
+              >
+                <path d="M9 11l3 3l8 -8" />
+                <path
+                  d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+                />
+              </svg>
+            </span>
+            <span class="option__label">Uppercase letters (A–Z)</span>
+          </label>
+
+          <label class="option" for="lowercase">
+            <input
+              class="option__input"
+              type="checkbox"
+              id="lowercase"
+              checked
+              data-option="lowercase"
+            />
+            <span class="option__box" aria-hidden="true">
+              <svg
+                class="option__check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                focusable="false"
+              >
+                <path d="M9 11l3 3l8 -8" />
+                <path
+                  d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+                />
+              </svg>
+            </span>
+            <span class="option__label">Lowercase letters (a–z)</span>
+          </label>
+
+          <label class="option" for="numbers">
+            <input
+              class="option__input"
+              type="checkbox"
+              id="numbers"
+              checked
+              data-option="numbers"
+            />
+            <span class="option__box" aria-hidden="true">
+              <svg
+                class="option__check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                focusable="false"
+              >
+                <path d="M9 11l3 3l8 -8" />
+                <path
+                  d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+                />
+              </svg>
+            </span>
+            <span class="option__label">Numbers (0–9)</span>
+          </label>
+
+          <label class="option" for="symbols">
+            <input
+              class="option__input"
+              type="checkbox"
+              id="symbols"
+              checked
+              data-option="symbols"
+            />
+            <span class="option__box" aria-hidden="true">
+              <svg
+                class="option__check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                focusable="false"
+              >
+                <path d="M9 11l3 3l8 -8" />
+                <path
+                  d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"
+                />
+              </svg>
+            </span>
+            <span class="option__label">Symbols (!@#$%^&amp;*…)</span>
+          </label>
+        </fieldset>
+
+        <p class="form-error" role="alert" data-error hidden>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M12 9v4" />
+            <path
+              d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z"
+            />
+            <path d="M12 16h.01" />
+          </svg>
+          <span data-error-text
+            >Select at least one character type to generate a password.</span
+          >
+        </p>
+
+        <div class="strength">
+          <div class="strength__head">
+            <span class="strength__label">Strength</span>
+            <span class="strength__text" data-strength-text>—</span>
+          </div>
+          <div class="strength__bars" aria-hidden="true">
+            <span class="strength__bar" data-strength-bar></span>
+            <span class="strength__bar" data-strength-bar></span>
+            <span class="strength__bar" data-strength-bar></span>
+            <span class="strength__bar" data-strength-bar></span>
+          </div>
+        </div>
+
+        <p
+          class="visually-hidden"
+          role="status"
+          aria-live="polite"
+          data-strength-announcement
+        ></p>
+
+        <button class="btn btn--primary" type="submit" data-generate-button>
+          <span class="btn__label" data-generate-label=""
+            >GENERATE PASSWORD</span
+          >
+          <!-- Tabler "arrow-right" icon -->
+          <svg
+            class="btn__icon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M5 12l14 0" />
+            <path d="M13 18l6 -6" />
+            <path d="M13 6l6 6" />
+          </svg>
+        </button>
+      </form>
+    </main>
+  </body>
+</html>

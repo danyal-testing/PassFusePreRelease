@@ -1,0 +1,143 @@
+/* =========================================================================
+   Base — document layout, dual-layer animated Steel-blue ambient lighting,
+   and radially faded architectural Dot Grid (`.ambient-background`).
+   Cascade layer: base.
+
+   Architectural Stacking Order:
+   1. Base page background (`html` and `body` with `--bg` + top radial wash).
+   2. Ambient gradient layers (`body::before` primary 32s & `body::after`
+      secondary 26s at `z-index: 0`).
+   3. Dot Grid with smooth radial edge fade (`.ambient-background` at
+      `z-index: 1`) so ambient light moves behind the steady dot matrix
+      without obscuring or erasing the dots.
+   4. Application content (`.generator` at `z-index: 2`).
+   ========================================================================= */
+@layer base {
+  /* Apply the theme background color and subtle top radial wash directly to
+     the root `html` canvas as well as `body`. On iOS Safari (especially on
+     compact 375x667 viewports like iPhone SE 2022 before the first scroll),
+     any difference between the layout viewport, small viewport (100svh),
+     large viewport (100lvh), or bottom safe-area / rubber-band overscroll
+     exposes the root `html` canvas. Coloring `html` with `var(--bg)` and
+     avoiding `background-attachment: fixed` on `body` eliminates the
+     first-load bottom black strip without forced scrolling or JS hacks. */
+  html {
+    overflow-x: clip;
+    background-color: var(--bg);
+    background-image: radial-gradient(
+      120% 90% at 50% 0%,
+      var(--bg-gradient-top) 0%,
+      var(--bg) 68%
+    );
+    background-repeat: no-repeat;
+  }
+
+  body {
+    display: grid;
+    grid-template-columns: minmax(0, var(--container-max));
+    justify-content: center;
+    align-content: safe center;
+    padding: max(clamp(0.75rem, 2.5svh, 1.5rem), env(safe-area-inset-top))
+      max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-right))
+      max(clamp(0.75rem, 2.5svh, 1.5rem), env(safe-area-inset-bottom))
+      max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-left));
+    overflow-x: clip;
+    background-color: var(--bg);
+    background-image: radial-gradient(
+      120% 90% at 50% 0%,
+      var(--bg-gradient-top) 0%,
+      var(--bg) 68%
+    );
+    background-repeat: no-repeat;
+    position: relative;
+    transition:
+      background-color var(--duration-normal) var(--ease-standard),
+      color var(--duration-normal) var(--ease-standard);
+  }
+
+  /* Layer B & C — Dual Independently Animated Steel-Blue Ambient Gradients:
+     Oversized soft radial gradients (`z-index: 0`) that slowly drift, scale,
+     and rotate behind the Dot Grid without heavy blur filters or hard edges. */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: var(--radius-full);
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* Layer B — Primary Steel-Blue Ambient Light (32s smooth orbital drift) */
+  body::before {
+    width: min(145vmax, 78rem);
+    height: min(120vmax, 64rem);
+    transform: translate3d(-56%, -52%, 0) rotate(0deg) scale(1, 0.92);
+    background: radial-gradient(
+      closest-side at 50% 50%,
+      var(--ambient-primary-core) 0%,
+      var(--ambient-primary-mid) 38%,
+      var(--ambient-primary-edge) 68%,
+      transparent 96%
+    );
+    animation: pg-ambient-primary var(--ambient-primary-duration) ease-in-out
+      infinite;
+  }
+
+  /* Layer C — Secondary Platinum / Steel-Blue Ambient Light (26s independent counter-drift) */
+  body::after {
+    width: min(135vmax, 72rem);
+    height: min(110vmax, 58rem);
+    transform: translate3d(-44%, -46%, 0) rotate(0deg) scale(0.94, 1.04);
+    background: radial-gradient(
+      closest-side at 50% 50%,
+      var(--ambient-secondary-core) 0%,
+      var(--ambient-secondary-mid) 42%,
+      transparent 94%
+    );
+    animation: pg-ambient-secondary var(--ambient-secondary-duration)
+      ease-in-out infinite;
+  }
+
+  /* Layer A — Dot Grid / Dot Matrix with Smooth Radial Fade (`z-index: 1`):
+     Steady technical grid of 22px-spaced points (20px/19px on mobile) that
+     remains visually anchored above the moving ambient glow and below
+     `.generator`, gradually fading toward the outer viewport edges. */
+  .ambient-background {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle,
+      var(--dot-grid-color) 1.2px,
+      transparent 1.35px
+    );
+    background-size: var(--dot-grid-size) var(--dot-grid-size);
+    background-position: center center;
+    -webkit-mask-image: radial-gradient(
+      ellipse 84% 78% at 50% 50%,
+      #000 18%,
+      rgba(0, 0, 0, 0.62) 55%,
+      rgba(0, 0, 0, 0.18) 78%,
+      transparent 96%
+    );
+    mask-image: radial-gradient(
+      ellipse 84% 78% at 50% 50%,
+      #000 18%,
+      rgba(0, 0, 0, 0.62) 55%,
+      rgba(0, 0, 0, 0.18) 78%,
+      transparent 96%
+    );
+  }
+
+  /* Layer 4 — Application Content (`z-index: 2`):
+     Positioned cleanly above all decorative background and dot-grid layers. */
+  .generator {
+    position: relative;
+    z-index: 2;
+    animation: pg-enter var(--duration-slow) var(--ease-decelerate) both;
+  }
+}

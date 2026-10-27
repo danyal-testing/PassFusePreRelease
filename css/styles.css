@@ -1,0 +1,41 @@
+/* =========================================================================
+   Password Generator — stylesheet entry point.
+
+   This file only wires the modular partials together; all real styling lives
+   in the base/, layout/, components/ and utilities/ folders.
+
+   The cascade-layer order declared below is the single source of truth for
+   specificity — later layers win. Because the order is declared up-front, the
+   physical @import order of layered partials does not affect the cascade;
+   unlayered rules (responsive/animations) still win over every layer.
+
+   Performance note: @import adds a few sequential requests during local
+   development, which is negligible for a project this small. If a build tool
+   (e.g. Vite / Lightning CSS) is added later, these partials are inlined and
+   minified into a single file automatically — no code changes required.
+   ========================================================================= */
+@layer reset, tokens, base, components, utilities;
+
+/* ---- Base ---- */
+@import url("./base/reset.css");
+@import url("./base/variables.css");
+@import url("./base/typography.css");
+@import url("./base/base.css");
+
+/* ---- Layout ---- */
+@import url("./layout/container.css");
+@import url("./layout/header.css");
+
+/* ---- Components ---- */
+@import url("./components/card.css");
+@import url("./components/slider.css");
+@import url("./components/checkbox.css");
+@import url("./components/strength-meter.css");
+@import url("./components/button.css");
+@import url("./components/form.css");
+@import url("./components/notfound.css");
+
+/* ---- Utilities ---- */
+@import url("./utilities/helpers.css");
+@import url("./utilities/animations.css");
+@import url("./utilities/responsive.css");

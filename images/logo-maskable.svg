@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="PassFuse maskable icon">
+  <defs>
+    <linearGradient id="pf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141923"/>
+      <stop offset="55%" stop-color="#0D1118"/>
+      <stop offset="100%" stop-color="#090B0F"/>
+    </linearGradient>
+    <radialGradient id="pf-glow" cx="50%" cy="46%" r="50%">
+      <stop offset="0%" stop-color="#8298B8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#090B0F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pf-platinum" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F6F9FC"/>
+      <stop offset="100%" stop-color="#DCE6F2"/>
+    </linearGradient>
+    <linearGradient id="pf-steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9BB4D4"/>
+      <stop offset="100%" stop-color="#6882A6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#pf-bg)"/>
+  <rect width="512" height="512" fill="url(#pf-glow)"/>
+  <g transform="translate(256, 256) scale(0.78) translate(-258.5, -256)">
+    <g fill="url(#pf-platinum)">
+      <polygon points="208,144 257,144 177,272 128,272"/>
+      <polygon points="276,144 325,144 185,368 136,368"/>
+    </g>
+    <g fill="url(#pf-steel)">
+      <path d="M 325 144 A 64 64 0 0 1 325 272 Z"/>
+      <polygon points="263,272 325,272 325,320 283,320 253,368 204,368"/>
+    </g>
+  </g>
+</svg>

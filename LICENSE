@@ -1,0 +1,56 @@
+MIT License
+
+Copyright (c) 2026 DanyaL NaDeri
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+================================================================================
+THIRD-PARTY LICENSES & ATTRIBUTION
+================================================================================
+
+This project bundles the following third-party assets. Their licenses apply to
+those assets only.
+
+--------------------------------------------------------------------------------
+Tabler Icons — https://tabler.io/icons (https://github.com/tabler/tabler-icons)
+--------------------------------------------------------------------------------
+Used for inline UI control icons (copy, copy-check, checkbox, sun, moon,
+alert-triangle, arrow-right).
+
+MIT License
+Copyright (c) 2020-2026 Paweł Kuna
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+The PassFuse Swiss PF geometric brand mark (images/logo-mark.svg,
+images/logo-mark-light.svg, images/logo-rounded.svg, images/logo-maskable.svg,
+images/apple-touch-icon.png, images/icons/app/*, images/favicon*, and
+images/og-image.png) is original project artwork covered by the primary MIT
+License above.

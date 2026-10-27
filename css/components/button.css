@@ -1,0 +1,72 @@
+/* =========================================================================
+   Component: button — primary generate action (Carbon Platinum).
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: var(--control-height);
+    padding: 0 var(--space-6);
+    border-radius: var(--radius-md);
+    font-family: var(--font-display-family);
+    font-size: var(--font-button);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    white-space: nowrap;
+    user-select: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      background-image var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-press) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-fast) var(--ease-standard);
+  }
+  .btn__label {
+    text-transform: uppercase;
+    letter-spacing: 0.055em;
+    line-height: 1;
+  }
+  .btn--primary {
+    background-color: var(--accent);
+    background-image: var(--accent-gradient);
+    color: var(--on-accent);
+    border: 1px solid var(--border-strong);
+    box-shadow: var(--elevation-1);
+  }
+  .btn--primary:hover {
+    background-color: var(--accent-hover);
+    background-image: var(--accent-gradient-hover);
+    border-color: var(--border-accent);
+    box-shadow: var(--accent-glow);
+    transform: translateY(-1px);
+  }
+  .btn--primary:active {
+    background-color: var(--accent-pressed);
+    box-shadow: var(--elevation-1);
+    transform: translateY(0) scale(0.985);
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: var(--opacity-disabled);
+    pointer-events: none;
+  }
+  .btn__icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    transition: transform var(--duration-normal) var(--ease-emphasized);
+  }
+  .btn--primary:hover .btn__icon {
+    transform: translateX(3px);
+  }
+  .btn--primary:active .btn__icon {
+    transform: translateX(1px);
+  }
+}

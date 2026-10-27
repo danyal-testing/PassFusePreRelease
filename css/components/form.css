@@ -1,0 +1,23 @@
+/* =========================================================================
+   Component: form — inline validation message.
+   Cascade layer: components.
+   (The project has no tooltip component; the illustrative tooltip.css from
+   the reference structure is intentionally omitted to avoid dead files.)
+   ========================================================================= */
+@layer components {
+  .form-error {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--danger);
+    font-size: var(--font-small);
+  }
+  .form-error svg {
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+  }
+  .form-error[hidden] {
+    display: none;
+  }
+}

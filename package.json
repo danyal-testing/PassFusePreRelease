@@ -1,0 +1,47 @@
+{
+  "name": "passfuse",
+  "version": "1.2.0",
+  "private": true,
+  "description": "PassFuse — Carbon Platinum password generator built with HTML, CSS and vanilla JavaScript.",
+  "keywords": [
+    "passfuse",
+    "password",
+    "generator",
+    "security",
+    "web-crypto",
+    "accessibility",
+    "vanilla-js",
+    "static-site"
+  ],
+  "license": "MIT",
+  "author": "DanyaL NaDeri",
+  "type": "module",
+  "scripts": {
+    "set:url": "node scripts/set-production-url.mjs",
+    "screenshots": "node scripts/generate-screenshots.mjs",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:e2e": "node tests/e2e.mjs",
+    "test": "npm run test:unit && npm run test:e2e",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate": "npm run lint && npm run format:check && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.9.0",
+    "eslint": "9.9.0",
+    "globals": "15.9.0",
+    "playwright": "1.55.0",
+    "prettier": "3.3.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
+}

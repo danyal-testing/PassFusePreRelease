@@ -1,0 +1,5 @@
+# Allow all crawlers. Update domain with `npm run set:url -- https://example.com`.
+User-agent: *
+Allow: /
+
+Sitemap: https://danyalpassgen.vercel.app/sitemap.xml

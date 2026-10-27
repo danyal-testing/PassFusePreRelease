@@ -1,0 +1,226 @@
+/* =========================================================================
+   Utilities: responsive — breakpoint, short-viewport and environment media.
+   These rules are intentionally left OUT of the cascade layers so they can
+   override the layered component defaults (unlayered rules beat layered ones).
+   ========================================================================= */
+
+/* ---- Narrow mobile screens (<= 520px): switch character categories from
+   2 columns to 1 column and tune dot spacing for smaller screens ---- */
+@media (max-width: 32.5rem) {
+  .options {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+  .ambient-background {
+    --dot-grid-size: 20px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 92% 84% at 50% 50%,
+      #000 20%,
+      rgba(0, 0, 0, 0.58) 58%,
+      rgba(0, 0, 0, 0.16) 80%,
+      transparent 96%
+    );
+    mask-image: radial-gradient(
+      ellipse 92% 84% at 50% 50%,
+      #000 20%,
+      rgba(0, 0, 0, 0.58) 58%,
+      rgba(0, 0, 0, 0.16) 80%,
+      transparent 96%
+    );
+  }
+  body::before {
+    width: min(130vmax, 42rem);
+    height: min(110vmax, 36rem);
+  }
+  body::after {
+    width: min(120vmax, 38rem);
+    height: min(100vmax, 32rem);
+  }
+  .generator__output {
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    min-height: 3.875rem;
+  }
+  .generator__password {
+    font-size: clamp(0.9375rem, 4vw, 1.125rem);
+    letter-spacing: 0.01em;
+  }
+  .generator__copy {
+    padding: var(--space-2);
+  }
+  .option {
+    min-height: 2.75rem;
+    padding: var(--space-1) var(--space-3);
+    gap: var(--space-3);
+  }
+  .option__label {
+    font-size: var(--text-sm);
+  }
+  .strength {
+    padding: var(--space-3);
+  }
+}
+
+/* ---- Compact phones (<= 390px): refine vertical rhythm so 360x780,
+   375x667 (iPhone SE 2022), and 390x844 viewports fit comfortably ---- */
+@media (max-width: 24.5rem) {
+  body {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  .ambient-background {
+    --dot-grid-size: 19px;
+  }
+  .generator {
+    gap: var(--space-3);
+  }
+  .generator__brand {
+    gap: 0.4375rem;
+  }
+  .generator__title {
+    font-size: 0.84375rem;
+    letter-spacing: 0.05em;
+  }
+  .generator__panel {
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+  .options {
+    gap: 0.375rem;
+  }
+}
+
+/* ---- Standalone / installed Home Screen PWA mode:
+   Ensure full-height background continuity into the top and bottom safe areas ---- */
+@media (display-mode: standalone) {
+  html,
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  body {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* ---- Tablet & desktop (>= 521px): comfortable 2-column category grid ---- */
+@media (min-width: 32.5625rem) and (max-width: 64rem) {
+  .generator {
+    gap: var(--space-3);
+  }
+  .generator__panel {
+    padding: var(--space-6);
+  }
+}
+
+/* ---- Short-viewport compaction: tighten surrounding vertical rhythm ---- */
+@media (max-height: 760px) {
+  body {
+    padding-top: max(0.625rem, env(safe-area-inset-top));
+    padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
+  }
+  .generator {
+    gap: var(--space-2);
+  }
+  .generator__panel {
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+  }
+}
+
+/* ---- Very short viewports (iPhone SE 2022 Safari 375x667 with browser chrome,
+   laptops, split windows <= 680px tall) ---- */
+@media (max-height: 680px) {
+  .generator {
+    gap: var(--space-2);
+  }
+  .generator__output {
+    min-height: 3.625rem;
+  }
+  .generator__panel {
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+  }
+  .btn {
+    min-height: var(--control-height-compact);
+  }
+}
+
+/* ---- Windows High Contrast / forced colours ---- */
+@media (forced-colors: active) {
+  .card,
+  .theme-toggle,
+  .option,
+  .option__box,
+  .strength__bar,
+  .btn {
+    border: 1px solid ButtonText;
+  }
+  .btn--primary {
+    background: ButtonText;
+    color: ButtonFace;
+  }
+}
+
+/* ---- Ultra-narrow screens (folded foldables, e.g. Galaxy Fold ~280px) ---- */
+@media (max-width: 19rem) {
+  body {
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+  }
+  .generator__header {
+    grid-template-columns: 2.25rem 1fr 2.75rem;
+  }
+  .generator__brand {
+    gap: 0.3125rem;
+  }
+  .generator__logo {
+    width: 1.25rem;
+    height: 1.125rem;
+  }
+  .generator__title {
+    font-size: 0.71875rem;
+    letter-spacing: 0.025em;
+  }
+  .theme-toggle::after {
+    inset: -0.5rem 0 -0.5rem -0.5rem;
+  }
+  .strength {
+    padding-inline: var(--space-2);
+  }
+  .strength__bars {
+    gap: var(--space-1);
+  }
+  .generator__output {
+    padding-inline: var(--space-2);
+  }
+  .generator__password {
+    font-size: 0.875rem;
+    letter-spacing: -0.02em;
+  }
+  .btn {
+    padding-inline: var(--space-3);
+    font-size: var(--text-xs);
+  }
+  .btn__label {
+    letter-spacing: 0.03em;
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  html,
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .ambient-background,
+  body::before,
+  body::after,
+  .theme-toggle,
+  .generator__copy,
+  .btn {
+    display: none;
+  }
+}

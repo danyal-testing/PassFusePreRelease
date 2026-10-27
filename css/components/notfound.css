@@ -1,0 +1,53 @@
+/* =========================================================================
+   Component: notfound — the styled 404 page card (404.html).
+   Cascade layer: components. Reuses the shared .card and .btn primitives.
+   ========================================================================= */
+@layer components {
+  .notfound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+    padding: var(--space-8) var(--space-6);
+    align-self: center;
+    width: 100%;
+    max-width: var(--measure-narrow);
+    margin-inline: auto;
+  }
+  .notfound__mark {
+    display: inline-grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-md);
+    background-color: var(--surface-2);
+    border: 1px solid var(--border);
+    box-shadow: var(--elevation-1);
+  }
+  .notfound__logo {
+    width: 1.875rem;
+    height: 1.75rem;
+  }
+  .notfound__code {
+    font-family: var(--font-mono);
+    font-size: var(--font-display);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    color: var(--accent-text);
+  }
+  .notfound__title {
+    font-size: var(--font-h3);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+  }
+  .notfound__text {
+    font-size: var(--font-body);
+    line-height: var(--leading-normal);
+    color: var(--text-secondary);
+  }
+  .notfound__home {
+    margin-top: var(--space-2);
+    text-decoration: none;
+  }
+}
