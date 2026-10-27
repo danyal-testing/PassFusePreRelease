@@ -79,7 +79,7 @@ test("manifest icons, screenshots, and Carbon Platinum theme colors are consiste
 
 test("Open Graph, Twitter Card, Apple Touch Icon, and SVG brand assets are synchronized and free of V5 key artifacts", () => {
   const indexHtml = read("index.html");
-  assert.equal(indexHtml.includes("danyalpassfusev5.vercel.app"), false);
+  assert.equal(indexHtml.includes("danyalpassgen.vercel.app"), false);
 
   const canonical = indexHtml.match(
     /<link\s+rel="canonical"\s+href="([^"]+)"/
@@ -94,10 +94,12 @@ test("Open Graph, Twitter Card, Apple Touch Icon, and SVG brand assets are synch
     /<meta\s+[\s\S]*?name="twitter:image"\s+content="([^"]+)"/
   )?.[1];
 
-  assert.equal(canonical, "https://danyalpassgen.vercel.app/");
-  assert.equal(ogUrl, "https://danyalpassgen.vercel.app/");
+  assert.equal(canonical, "https://danyalpassfusebeta.vercel.app/");
+  assert.equal(ogUrl, "https://danyalpassfusebeta.vercel.app/");
   assert.ok(
-    ogImage?.startsWith("https://danyalpassgen.vercel.app/images/og-image.png")
+    ogImage?.startsWith(
+      "https://danyalpassfusebeta.vercel.app/images/og-image.png"
+    )
   );
   assert.equal(ogImage, twitterImage, "og:image and twitter:image must match");
 

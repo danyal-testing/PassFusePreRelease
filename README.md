@@ -2,7 +2,7 @@
 
 A privacy-first, cryptographically secure client-side password generator built with semantic HTML5, layered CSS (`@layer`), and modular Vanilla JavaScript. Styled with the **Carbon Platinum** design system, a radially faded architectural Dot Grid, and dual-layer animated Steel-blue ambient lighting, PassFuse runs locally in the browser via the Web Crypto API (`crypto.getRandomValues`) and works both directly from disk (`file://`) and as an installable offline-capable Progressive Web App (PWA) over HTTPS.
 
-- **Confirmed Production URL**: `https://danyalpassgen.vercel.app/`
+- **Confirmed Production URL**: `https://danyalpassfusebeta.vercel.app/`
 
 <p align="center">
   <img src="docs/screenshots/laptop-dark.png" alt="PassFuse on a laptop in dark mode" width="49%" />
@@ -72,7 +72,7 @@ npm run validate
 npm run screenshots
 
 # Update canonical production URL and recompute inline script SHA-256 CSP hashes
-npm run set:url -- https://danyalpassgen.vercel.app
+npm run set:url -- https://danyalpassfusebeta.vercel.app
 ```
 
 You can also open `index.html` directly from disk (`file://`) or serve the project root with any static HTTP server (e.g., `npx serve .` or `python3 -m http.server 8080`).
@@ -127,16 +127,16 @@ You can also open `index.html` directly from disk (`file://`) or serve the proje
 ### 1. Social Preview Image (`images/og-image.png`)
 
 - **Source path**: `images/og-image.png` (`1200 × 630` RGB PNG)
-- **Public URL**: `https://danyalpassgen.vercel.app/images/og-image.png?v=6`
+- **Public URL**: `https://danyalpassfusebeta.vercel.app/images/og-image.png?v=6`
 
 To replace the social preview image:
 
 1. Replace `images/og-image.png` with your updated `1200 × 630` PNG.
 2. Increment `OG_IMAGE_VERSION` and synchronize metadata and CSP hashes:
    ```bash
-   OG_IMAGE_VERSION=7 npm run set:url -- https://danyalpassgen.vercel.app
+   OG_IMAGE_VERSION=7 npm run set:url -- https://danyalpassfusebeta.vercel.app
    ```
-3. Deploy to production and verify `https://danyalpassgen.vercel.app/images/og-image.png?v=7` serves `Content-Type: image/png`.
+3. Deploy to production and verify `https://danyalpassfusebeta.vercel.app/images/og-image.png?v=7` serves `Content-Type: image/png`.
 4. Note that messaging platforms (iMessage, Telegram, WhatsApp, Slack, X) cache link previews by URL. Use platform cache-refresh tools (such as `@WebpageBot` on Telegram) or test with a fresh query parameter when verifying newly deployed social previews.
 
 ### 2. Apple Touch Icon (`images/apple-touch-icon.png`) & PWA Icons (`images/icons/app/`)
@@ -150,7 +150,7 @@ To replace or regenerate the app icons:
 1. Update the vector artwork in `images/logo-rounded.svg` (standard/Apple touch icon source) and `images/logo-maskable.svg` (maskable safe-zone source). Keep the background a full-bleed `512 × 512` opaque square without an inset border stroke or transparent pre-rounded corners so iOS and Android apply system masks without a white halo.
 2. Export `images/apple-touch-icon.png` (`180×180`), `images/icons/app/icon-192.png`, `images/icons/app/icon-512.png`, `images/icons/app/maskable-192.png`, `images/icons/app/maskable-512.png`, and `images/favicon-*.png` as opaque RGB PNGs.
 3. Increment the `CACHE` version constant in `sw.js` (e.g., `const CACHE = `${CACHE_PREFIX}v7`;`) so returning clients refresh precached icons, then run `npm run validate`.
-4. **Already-installed Home Screen shortcuts**: iOS and Android store a local snapshot of the Home Screen icon at installation time. After deploying updated icon files, remove the existing Home Screen shortcut, reload `https://danyalpassgen.vercel.app/` in the browser, and re-add it to the Home Screen.
+4. **Already-installed Home Screen shortcuts**: iOS and Android store a local snapshot of the Home Screen icon at installation time. After deploying updated icon files, remove the existing Home Screen shortcut, reload `https://danyalpassfusebeta.vercel.app/` in the browser, and re-add it to the Home Screen.
 
 ## License & Attribution
 

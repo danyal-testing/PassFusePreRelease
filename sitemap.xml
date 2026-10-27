@@ -2,7 +2,7 @@
 <!-- Update domain with `npm run set:url -- https://example.com` before publishing to a new domain. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://danyalpassgen.vercel.app/</loc>
+    <loc>https://danyalpassfusebeta.vercel.app/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>

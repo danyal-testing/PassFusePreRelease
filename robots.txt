@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://danyalpassgen.vercel.app/sitemap.xml
+Sitemap: https://danyalpassfusebeta.vercel.app/sitemap.xml
